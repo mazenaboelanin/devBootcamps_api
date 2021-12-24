@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const {Schema} = require('mongoose');
 
 const BootcampSchema = new Schema({
@@ -6,7 +7,7 @@ const BootcampSchema = new Schema({
         type: String,
         required: [true, 'Please add a name'],
         unique: true,
-        trim:true.value,
+        trim: true,
         maxlength: [50, 'Name can not be more than 50 characters']
     },
     slug: String,
@@ -18,7 +19,8 @@ const BootcampSchema = new Schema({
     website: {
         type: String,
         match: [
-            /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, 'Please use a vailed URL with Http or Https']
+            /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, 'Please use a vailed URL with Http or Https'
+        ]
     },
     phone:{
         type: String,
@@ -41,15 +43,15 @@ const BootcampSchema = new Schema({
         type: {
             type: String, // Don't do `{ location: { type: String } }`
             enum: ['Point'], // 'location.type' must be 'Point'
-            required: true
+            //required: true
           },
           coordinates: {
             type: [Number],
-            required: true,
+            //required: true,
             index:'2dsphere'
           },
-        formattedAddress:String,
-        street:String,
+        formattedAddress: String,
+        street: String,
         city: String,
         state: String,
         zipcode: String,
@@ -97,8 +99,7 @@ const BootcampSchema = new Schema({
     createdAt:{
         type: Date,
         default: Date.now
-    },
-
+    }
 });
 
 
