@@ -100,6 +100,10 @@ const BootcampSchema = new Schema({
         type: Date,
         default: Date.now
     }
+},
+{
+    toJSON: {virtuals: true},
+    toObject: {virtuals: true}
 });
 
 
@@ -130,6 +134,15 @@ this.location = {
 this.address = undefined;
 
 next();
+});
+
+
+// reverse populate with virtuals
+BootcampSchema.virtual('courses', {
+    ref: 'Course',
+    localField:'_id',
+    foreignField: 'bootcamp',
+    justOne: false
 });
 
 module.exports = mongoose.model('Bootcamp', BootcampSchema);
