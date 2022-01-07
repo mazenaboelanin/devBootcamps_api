@@ -136,6 +136,14 @@ this.address = undefined;
 next();
 });
 
+// cascade delete courses when bootcamp is deleted
+
+BootcampSchema.pre('remove', async function(next){
+    console.log(`courses being removed from bootcamp of id ${this._id}`);
+    await this.model('Course').deleteMany({bootcamp: this._id});
+    next();
+});
+
 
 // reverse populate with virtuals
 BootcampSchema.virtual('courses', {
