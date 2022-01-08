@@ -75,7 +75,7 @@ exports.deleteBootcamp = asyncHandler(async(req,res, next)=>{
 
 
 // @ desc       Upload Bootcamp Photo
-// @ route      put api/v1/bootcamps/:id/photo
+// @ route      PUT api/v1/bootcamps/:id/photo
 // @ access     Public
 exports.uploadBootcampPhoto = asyncHandler(async(req,res, next)=>{
     const {id} = req.params;
@@ -89,8 +89,7 @@ exports.uploadBootcampPhoto = asyncHandler(async(req,res, next)=>{
     if(!req.files){
         return next(new ErrorResponse(`Please Upload a file`, 404));
     }
-    //console.log(req.files);
-    
+ 
     const file = req.files.file;
 
     // check the file type photo with file extension
@@ -118,7 +117,5 @@ exports.uploadBootcampPhoto = asyncHandler(async(req,res, next)=>{
             data: file.name
         });
     });
-
-    console.log(file.name);
 
 });
